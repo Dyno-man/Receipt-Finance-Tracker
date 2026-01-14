@@ -31,3 +31,9 @@ Currently I have implemented the most basic of string manipulation to get the to
 The next step in the process is to now figure out a way for this to run continuosly, be able to pass an image into it and it spit out the number.
 
 To do this I want to put it into a container, the container is waiting for incoming pictures and once it has processed and sent the receiver the number it stays up and running. I will have to install docker for this and then I will have to think about how I want to do this, maybe run a fastapi middleware or an express.js middleware. FastAPI might be the move only because it will stay in theme with the python code but I am more familiar with express.js, I'll think about it. But for now I'll go ahead and install docker and start working on my own container.
+
+I have now put together the container, setup a fastapi middleware to handle incoming images, and made the ocr model easy to use behind the middleware.
+
+So now that we have that all setup in a docker container we need to somehow make it so that when images are sent we store the images and put the costs with them. There are a few ways that we can go about it but the idea that is popping up into my mind now is we put another layer of middleware to handle all incoming reqs, once the images are sent we send it to the fast api middleware and then we return the image and the cost from the fastapi to the middleware so that the middleware can then send the newe json package of the image with the cost to the database. 
+
+That's the overall goal for my next steps.
