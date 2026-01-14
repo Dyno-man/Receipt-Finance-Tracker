@@ -1,0 +1,33 @@
+# Objective
+
+The main objective of this project is to provide easy breakdowns of my finances by allowing me to upload pictures of myreceipts and store that data in a uniform way. Using graphs and tables to understand how my money is being spent.
+
+Later down the line we can incorporate E-Receipts in email and Banking APIs, but for now what we want is to only have physical receipt upload tracking.
+
+## Tech Stack
+- Ubuntu Server
+- Docker
+- OCR Model
+- Next.Js Frontend
+- Model for Categorizing Places (Or LLM For starting)
+
+## Implementation Plan
+I plan on first finding a model that is free and lightweight that has a good consistency of being able to read text from a picture. (easyocr Python lib)
+
+Then once we have that we can containerize the model and setup an API to allow images to be passed through.
+
+Once the OCR model is setup then I can link the cheapest LLM or Create my own category predective model, allowing me to properly categorize my spending habits.
+
+Once we have the API setup then we can setup an nginx container on an ubuntu server and create a data schema so that we are categorizing data in a proper fashion.
+
+### How to Find the expense
+After extracting all of the text from the model, all we need to do is run a string search for any number next to the word "Total" or any of it's variations, then convert the nums to ints, then run a comparison operation.
+
+
+
+### Current Impementation Notes
+Currently I have implemented the most basic of string manipulation to get the total from a receipt. These receipts are tested from 3 different walmart receipts stored on my machine. 
+
+The next step in the process is to now figure out a way for this to run continuosly, be able to pass an image into it and it spit out the number.
+
+To do this I want to put it into a container, the container is waiting for incoming pictures and once it has processed and sent the receiver the number it stays up and running. I will have to install docker for this and then I will have to think about how I want to do this, maybe run a fastapi middleware or an express.js middleware. FastAPI might be the move only because it will stay in theme with the python code but I am more familiar with express.js, I'll think about it. But for now I'll go ahead and install docker and start working on my own container.
