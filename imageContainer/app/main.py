@@ -57,10 +57,11 @@ async def store_uploaded_file(file: UploadFile):
     filepath = f"/code/app/images/{file.filename}"
     try:
         contents = await file.read()
+        print(contents)
         img = Image.open(io.BytesIO(contents))
         img.save(filepath)
     except Exception as e:
-        return {"Error": "Failed to upload open file, object may not have been an image: " + str(e)}
+        return {"Error": "Failed to upload open file: " + str(e)}
 
     #If Object is an img, then run it through the scan_image function
     result = scan_image(model, filepath)

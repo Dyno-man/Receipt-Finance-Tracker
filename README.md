@@ -24,7 +24,6 @@ Once we have the API setup then we can setup an nginx container on an ubuntu ser
 After extracting all of the text from the model, all we need to do is run a string search for any number next to the word "Total" or any of it's variations, then convert the nums to ints, then run a comparison operation.
 
 
-
 ### Current Impementation Notes
 Currently I have implemented the most basic of string manipulation to get the total from a receipt. These receipts are tested from 3 different walmart receipts stored on my machine. 
 
@@ -37,3 +36,11 @@ I have now put together the container, setup a fastapi middleware to handle inco
 So now that we have that all setup in a docker container we need to somehow make it so that when images are sent we store the images and put the costs with them. There are a few ways that we can go about it but the idea that is popping up into my mind now is we put another layer of middleware to handle all incoming reqs, once the images are sent we send it to the fast api middleware and then we return the image and the cost from the fastapi to the middleware so that the middleware can then send the newe json package of the image with the cost to the database. 
 
 That's the overall goal for my next steps.
+
+After a lot of trial and tribulation I was able to get the middleware container to send the image to the backend container. I was able to do this by using the request library in python, I was just running into a stupid error of not naming a json object properly so the backend container was getting confused on all the informatino I was sending its way. But now everything is working as it should.
+
+The only current improvements I plan to add today are having the image be removed from the container once it is done being processed just so that the containers don't get bloated. Then I'm going to attatch docker db, I'm thinking of using psql because I've really only had experience with firestore db. I want to stop being so locked in on one technology.
+
+What the db is going to do is once the image has been processed in the backend and returned to the middleware, the middleware will send the information to be stored in the db. For now I don't plan on storing anything crazy, because all I'm testing is walmart receipts currently. But I'll make a basic table and see where it goes. 
+
+I eventually plan to add some improvements to the processing in the backend so we can start grouping some categories such as grocery, automobile, recreation, other, etc.. The way I'm planning on doing that is using fuzzy string matching and regex in the backend just so we can group categories better and the frontend will have a wider variety of data to play around with. 

@@ -1,4 +1,6 @@
 import easyocr
+import requests
+
 
 def pretty_print(l):
     for i in l:
