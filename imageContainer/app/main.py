@@ -57,7 +57,6 @@ async def store_uploaded_file(file: UploadFile):
     filepath = f"/code/app/images/{file.filename}"
     try:
         contents = await file.read()
-        print(contents)
         img = Image.open(io.BytesIO(contents))
         img.save(filepath)
     except Exception as e:

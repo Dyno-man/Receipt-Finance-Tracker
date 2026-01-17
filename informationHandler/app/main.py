@@ -2,9 +2,14 @@ from fastapi import FastAPI, UploadFile
 from PIL import Image
 import io
 import requests
+from dotenv import load_dotenv
+import os 
 
-IMAGE_CONTAINER_ADDRESS = 'http://172.18.0.2:80'
-DB_CONTAINER_ADDRESS = 'http://172.18.0.4:80'
+load_dotenv()
+
+
+IMAGE_CONTAINER_ADDRESS = os.getenv('IMAGE_CONTAINER_ADDRESS')
+DB_CONTAINER_ADDRESS = os.getenv('DB_CONTAINER_ADDRESS')
 
 app = FastAPI()
 
