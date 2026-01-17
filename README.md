@@ -1,5 +1,4 @@
 # Objective
-
 The main objective of this project is to provide easy breakdowns of my finances by allowing me to upload pictures of myreceipts and store that data in a uniform way. Using graphs and tables to understand how my money is being spent.
 
 Later down the line we can incorporate E-Receipts in email and Banking APIs, but for now what we want is to only have physical receipt upload tracking.
@@ -46,3 +45,11 @@ What the db is going to do is once the image has been processed in the backend a
 I eventually plan to add some improvements to the processing in the backend so we can start grouping some categories such as grocery, automobile, recreation, other, etc.. The way I'm planning on doing that is using fuzzy string matching and regex in the backend just so we can group categories better and the frontend will have a wider variety of data to play around with. 
 
 Before I ended up adding the psql container I just wanted to play around a bit so I created a compose.yaml file. Defintley a lot simpler than I initially thought it would be, but it is pretty awesome to see it work just so effortlesly. So just a small push before I add the db container.
+
+Alright so I finally got data to persist through the freaking psql docker image, unfortunatley I seem to be horrible at reading documentation because there is a specific area in the docker container itself where data is stored. I have now fixed the point where the volume in the docker compose file writes data to. 
+
+So now we don't have to worry about losing data if the image goes up or down, just don't let your data get corrupted lol
+
+Anyways now that that's done, I've also been playing around with the psycopg library so that I can communicate with the psql container and I got that working a little while ago. I just need to go ahead and write some functions for this so that everything is standardized. I guess I should probably add a primary key to the data as well, just been a minute since I've messed around with SQL type dbs. But I'll figure this out, I mean this data isn't even that complicated it's just numbers we will be storing with D/T amd the type of expense it is.
+
+Oooo I also keep forgetting I need to make a couple of different dicts so that I can start to hammer down on what goes where for grocery and stuff. In the front end I'll probably make it so that you can hard overide it just incase the OCR model fricks up cause it is not the best one in the world. Good enough for this though. 
