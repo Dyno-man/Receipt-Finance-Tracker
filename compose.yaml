@@ -9,3 +9,19 @@ services:
     ports:
       - "81:80"
     restart: on-failure
+  db:
+    image: postgres
+    restart: always
+    shm_size: 128mb
+    environment:
+      - POSTGRES_PASSWORD=db_123
+      - POSTGRES_USER=test
+      - POSTGRES_DB=example
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data:/etc/data
+
+volumes:
+  db-data:
+    

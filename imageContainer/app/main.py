@@ -1,4 +1,4 @@
-from fastapi import FastAPI, File, UploadFile
+from fastapi import FastAPI, UploadFile
 import easyocr
 from PIL import Image
 import io

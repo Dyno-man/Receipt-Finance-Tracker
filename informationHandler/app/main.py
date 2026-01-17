@@ -1,18 +1,17 @@
 from fastapi import FastAPI, UploadFile
-import httpx
 from PIL import Image
 import io
-import subprocess
 import requests
 
-imageContainerAddress = 'http://172.18.0.2:80'
+IMAGE_CONTAINER_ADDRESS = 'http://172.18.0.2:80'
+DB_CONTAINER_ADDRESS = 'http://172.18.0.4:80'
 
 app = FastAPI()
 
 # Health check to make sure backend is accesible
 @app.get('/health')
 async def health():
-    response = requests.get(imageContainerAddress)
+    response = requests.get(IMAGE_CONTAINER_ADDRESS)
     print(response)
     return response.json()
 
@@ -33,7 +32,7 @@ async def send_to_image_container(file: UploadFile):
         }
 
 # Send the image obj to the backend docker container to be processed
-        req = requests.post(f'{imageContainerAddress}/upload', files=files)
+        req = requests.post(f'{IMAGE_CONTAINER_ADDRESS}/upload', files=files)
 
 # Return the information to the sender
         return req.json()
