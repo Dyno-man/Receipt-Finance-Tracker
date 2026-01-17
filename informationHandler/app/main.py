@@ -5,7 +5,7 @@ import io
 import subprocess
 import requests
 
-imageContainerAddress = 'http://172.17.0.2:80'
+imageContainerAddress = 'http://172.18.0.2:80'
 
 app = FastAPI()
 

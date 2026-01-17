@@ -1,0 +1,11 @@
+services:
+  backend:
+    image: img-processor:latest
+    ports:
+      - "80:80"
+    restart: on-failure
+  middleware:
+    image: infor-container:latest
+    ports:
+      - "81:80"
+    restart: on-failure

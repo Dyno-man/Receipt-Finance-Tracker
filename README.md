@@ -44,3 +44,5 @@ The only current improvements I plan to add today are having the image be remove
 What the db is going to do is once the image has been processed in the backend and returned to the middleware, the middleware will send the information to be stored in the db. For now I don't plan on storing anything crazy, because all I'm testing is walmart receipts currently. But I'll make a basic table and see where it goes. 
 
 I eventually plan to add some improvements to the processing in the backend so we can start grouping some categories such as grocery, automobile, recreation, other, etc.. The way I'm planning on doing that is using fuzzy string matching and regex in the backend just so we can group categories better and the frontend will have a wider variety of data to play around with. 
+
+Before I ended up adding the psql container I just wanted to play around a bit so I created a compose.yaml file. Defintley a lot simpler than I initially thought it would be, but it is pretty awesome to see it work just so effortlesly. So just a small push before I add the db container.
