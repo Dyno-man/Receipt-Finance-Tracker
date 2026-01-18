@@ -1,5 +1,5 @@
 fastapi[standard]
 Pillow
 requests
-dotenv-python
+python-dotenv
 psycopg[binary]

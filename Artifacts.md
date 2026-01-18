@@ -8,6 +8,7 @@ So how do I want to set this up? Well for starters let's go ahead and plan out w
 For now that should be fine so I want it structured as such
 
 CREATE TABLE expenses (
+ReceiptID INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
 Date TIMESTAMP,
 ToE VARCHAR(255),
 Amount INT
