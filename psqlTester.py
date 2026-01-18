@@ -33,3 +33,17 @@ try:
             cur.execute("SELECT * FROM expenses;")
 except Exception as e:
     print(f'Failed: {e}')
+
+
+def insert_receipt(expense, cost, date=date.today()):
+    try:
+        with psycopg.connect(conninfo) as conn:
+            with conn.cursor() as cur:
+                cur.execute("INSERT INTO expenses (Date, ToE, Amount) VALUES (%s, %s, %s)", (date, expense, cost))
+                return True
+    except Exception as e:
+        print(f"Failed to insert: {e}")
+        return False
+
+def delete_receipt():
+    return -1
