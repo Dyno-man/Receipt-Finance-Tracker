@@ -74,8 +74,6 @@ def delete_receipt(ids: list):
         print(f'Failed to remove row: {e}')
         return False
     
-delete_receipt([1,3])
-
 
 """
 Want to make a general purpose query for sorting, so I guess that means i want 4 functions.
@@ -90,6 +88,11 @@ For functions with the sort var you have three options for passing values
 1 => is data > data
 """
 
+"""
+This function will return receipts uploaded before, after, or equal to what the user requests
+date => is a date object
+sort => int
+"""
 def search_date(date: date, sort: int) -> bool:
     try:
         with psycopg.connect(conninfo) as conn:
@@ -104,8 +107,12 @@ def search_date(date: date, sort: int) -> bool:
     except Exception as e:
         print(f'Failed to remove row: {e}')
         return False
-
-def search_toe(toe: int) -> bool:
+"""
+This function will return receipts uploaded before, after, or equal to what the user requests
+date => is a date object
+sort => int
+"""
+def search_toe(toe) -> bool:
     try:
         with psycopg.connect(conninfo) as conn:
             with conn.cursor() as cur:
@@ -114,7 +121,11 @@ def search_toe(toe: int) -> bool:
     except Exception as e:
         print(f'Failed to remove row: {e}')
         return False -1
-
+"""
+This function will return receipts uploaded before, after, or equal to what the user requests
+date => is a date object
+sort => int
+"""
 def search_amount(amount: int, sort: int) -> bool:
     try:
         with psycopg.connect(conninfo) as conn:
@@ -134,7 +145,11 @@ def search_amount(amount: int, sort: int) -> bool:
         print(f'Failed to remove row: {e}')
         return False
 
-
+"""
+This function inserts random test data
+date => is a date object
+sort => int
+"""
 def insert_random_data():
     categories = ["Grocery", "Automobile", "Other", "Wasteful"]
     information = []
@@ -145,4 +160,21 @@ def insert_random_data():
     for item in information:
         insert_receipt(item[1], item[2], item[0])
 
-search_amount(500, -1)
+"""
+This function will return receipts uploaded before, after, or equal to what the user requests
+date => is a date object
+sort => int
+"""
+def get_all_data():
+    try:
+        with psycopg.connect(conninfo) as conn:
+            with conn.cursor() as cur:
+                cur.execute(f"SELECT * FROM {TABLE}")
+
+                for record in cur:
+                    print(record)
+
+                return cur
+    except Exception as e:
+        print(f"Failed to grab data: {e}")
+        return False
